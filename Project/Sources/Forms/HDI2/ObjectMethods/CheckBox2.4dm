@@ -1,0 +1,1 @@
+﻿﻿Form:C1466.smtp.acceptUnsecureConnection:=Not:C34(Form:C1466.smtp.acceptUnsecureConnection)
