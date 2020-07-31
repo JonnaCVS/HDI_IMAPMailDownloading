@@ -14,12 +14,12 @@ Class constructor
 	
 	// Creation of a list to display the mailbox name in a hierarchical list
 Function createList
-	var $1,$lvl : Integer
-	var $countTmp,$ref : Integer
+	var $1; $lvl : Integer
+	var $countTmp; $ref : Integer
 	var $names : Collection
 	var $mailCount : Text
 	var $info : Object
-	var $0,$listRef : Integer
+	var $0; $listRef : Integer
 	
 	
 	If (Count parameters:C259>0)
@@ -30,7 +30,7 @@ Function createList
 	
 	$listRef:=New list:C375
 	
-	$names:=Split string:C1554(This:C1470._mailboxes[This:C1470._count.value()].name;This:C1470._separator)
+	$names:=Split string:C1554(This:C1470._mailboxes[This:C1470._count.value()].name; This:C1470._separator)
 	
 	// loop on all the mailboxes
 	While (($names.length>=$lvl) & (This:C1470._mailboxes.length>This:C1470._count.value()))
@@ -38,26 +38,26 @@ Function createList
 		If ($names.length>$lvl)
 			$countTmp:=This:C1470._count.value()
 			$ref:=This:C1470.createList($names.length)
-			DELETE FROM LIST:C624(This:C1470._mailboxes[$countTmp-1].listRef;This:C1470._mailboxes[$countTmp-1].listId)
+			DELETE FROM LIST:C624(This:C1470._mailboxes[$countTmp-1].listRef; This:C1470._mailboxes[$countTmp-1].listId)
 			$mailCount:=" ("+String:C10($info.mailCount)+")"
 			// create a new hierarchy with the mailbox information 
-			APPEND TO LIST:C376($listRef;$names[$names.length-2]+$mailCount;This:C1470._UID.inc();$ref;False:C215)
+			APPEND TO LIST:C376($listRef; $names[$names.length-2]+$mailCount; This:C1470._UID.inc(); $ref; False:C215)
 			// add utils information in _mailboxes collection for the search
 			This:C1470._mailboxes[$countTmp-1].listRef:=$listRef
-			This:C1470._mailboxes[$countTmp-1].listId:=This:C1470._UID.value();
-		Else // add to the current hierarchy
+			This:C1470._mailboxes[$countTmp-1].listId:=This:C1470._UID.value(); 
+		Else   // add to the current hierarchy
 			// Search the number of email in the mailbox
 			$info:=This:C1470._transporter.getBoxInfo(This:C1470._mailboxes[This:C1470._count.value()].name)
 			$mailCount:=" ("+String:C10($info.mailCount)+")"
 			// add the mailbox information to the current hierachy
-			APPEND TO LIST:C376($listRef;$names[$names.length-1]+$mailCount;This:C1470._UID.inc())
+			APPEND TO LIST:C376($listRef; $names[$names.length-1]+$mailCount; This:C1470._UID.inc())
 			// add utils information in _mailboxes collection for the search
 			This:C1470._mailboxes[This:C1470._count.value()].listRef:=$listRef
-			This:C1470._mailboxes[This:C1470._count.value()].listId:=This:C1470._UID.value();
+			This:C1470._mailboxes[This:C1470._count.value()].listId:=This:C1470._UID.value(); 
 		End if 
 		
 		If (This:C1470._count.inc()<This:C1470._mailboxes.length)
-			$names:=Split string:C1554(This:C1470._mailboxes[This:C1470._count.value()].name;This:C1470._separator)
+			$names:=Split string:C1554(This:C1470._mailboxes[This:C1470._count.value()].name; This:C1470._separator)
 		End if 
 		
 	End while 
@@ -70,13 +70,13 @@ Function createList
 Function search
 	
 	var $mailbox : Collection
-	var $listId,$1 : Integer
+	var $listId; $1 : Integer
 	var $0 : Object
 	
 	$listId:=$1
 	
 	// search bi listId in the _mailboxes collection
-	$mailbox:=This:C1470._mailboxes.query("listId=:1";$listId)
+	$mailbox:=This:C1470._mailboxes.query("listId=:1"; $listId)
 	
 	If ($mailbox.length=0)
 		$0:=Null:C1517

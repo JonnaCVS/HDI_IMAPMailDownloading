@@ -5,9 +5,9 @@
 // $2 -> type of body 
 // $0 -> body content if finded, else empty string
 
-var $1,$email : Object
-var $2,$type : Text
-var $0,$message : Text
+var $1; $email : Object
+var $2; $type : Text
+var $0; $message : Text
 var $partId : Text
 var $result : Collection
 
@@ -19,7 +19,7 @@ $type:=$2
 If ($email.bodyStructure.subParts#Null:C1517)
 	
 	// look up for all the subparts that contain the type
-	$result:=$email.bodyStructure.subParts.query("type=:1";$type)
+	$result:=$email.bodyStructure.subParts.query("type=:1"; $type)
 	
 	If ($result.length>0)
 		

@@ -20,7 +20,7 @@ Function checkConnection
 	
 	// Select a mailboxaccording to is name
 Function selectBox
-	var $name,$1 : Text
+	var $name; $1 : Text
 	
 	If (Count parameters:C259=1)
 		$name:=$1
